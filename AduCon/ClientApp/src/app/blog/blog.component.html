@@ -1,1 +1,19 @@
-blog
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3">
+            <div *ngFor="let blog of blogs" class="row border-right">
+                <a class="nav-link text-dark" (click)="selectBlog(blog)">{{blog.title}}</a>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <div class="row text-center paragraph">
+               <h5 > <strong>{{blog.title}}</strong></h5> 
+            </div> 
+            <div class="row">
+                <div *ngFor="let para of paragraphs" class="col-lg-12 paragraph">
+                    {{para.content}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

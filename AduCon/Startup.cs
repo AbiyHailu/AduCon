@@ -2,7 +2,6 @@ using AduCon.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +25,7 @@ namespace AduCon
          
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AdconContext>(options => options.UseSqlServer(Configuration.GetConnectionString("RomiConnection")));
+            services.AddDbContext<AdconContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AduconConnection")));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

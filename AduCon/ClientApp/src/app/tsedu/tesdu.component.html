@@ -1,0 +1,42 @@
+ 
+<div class="container-fluid">
+    <div class="row">  
+        <div class="col-lg-3 border-right hv-100"> 
+            <div >
+               Manage Blogs
+            </div> 
+        </div>
+        <div class="col-lg-9"> 
+            <div class="main-table">
+                <button class="btn btn-success btn-create btn-nomargin "
+                   (click)="createNewItem()">
+                   <strong>Create New Blog</strong>
+                 </button>  
+                 <div class="row-fluid">
+                   <table class="table table-sm">
+                     <thead class="thead-dark">
+                       <tr>
+                         <th scope="col">#</th>
+                         <th scope="col"> Name</th>
+                         <th scope="col">Varity</th> 
+                         <th scope="col"> Manage</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr *ngFor="let item of title; let i = index">
+                         <th scope="row">{{i+1}}</th>
+                         <td> {{item.name}} </td>
+                         <td> {{item.varity}}</td> 
+                         <td>
+                           <span class="span-manage" (click)="editItem(item)">Edit</span> |
+                           <span class="span-manage" (click)="ghDetails(item)">Detail</span>
+                         </td>
+                       </tr>
+                     </tbody>
+                   </table>
+                 </div>
+               </div>
+
+        </div>
+    </div>
+  </div> 

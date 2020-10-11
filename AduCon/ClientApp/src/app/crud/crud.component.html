@@ -11,7 +11,7 @@
 
         <input *ngSwitchCase="'text'" class="form-control" autocomplete="off" [formControlName]="layoutElement.Binding"
           placeholder="{{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
-          type="text" > 
+          type="text">
 
         <input *ngSwitchCase="'number'" class="form-control" [formControlName]="layoutElement.Binding"
           placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
@@ -21,13 +21,17 @@
           placeholder="Enter {{layoutElement.Label}}" [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value'
           type="date">
 
-        <select *ngSwitchCase="'select'"  [formControlName]="layoutElement.Binding" >
-          <option disabled  selected value="">{{layoutElement.Label}}</option>
+        <input [formControlName]="layoutElement.Binding" *ngSwitchCase="'checkBox'" type="checkbox"
+          [id]="layoutElement.Binding" [(ngModel)]='layoutElement.Value' value="layoutElement.Value">
+
+        <select *ngSwitchCase="'select'" [formControlName]="layoutElement.Binding">
+          <option disabled selected value="">{{layoutElement.Label}}</option>
           <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
         </select>
-        
-        <select *ngSwitchCase="'selectEmit'" (change)="onChange($event.target.value)" [formControlName]="layoutElement.Binding" >
-          <option disabled  selected value="">{{layoutElement.Label}}</option>
+
+        <select *ngSwitchCase="'selectEmit'" (change)="onChange($event.target.value)"
+          [formControlName]="layoutElement.Binding">
+          <option disabled selected value="">{{layoutElement.Label}}</option>
           <option *ngFor="let prop of layoutElement.SelectList" value="{{prop}}">{{prop}}</option>
         </select>
 

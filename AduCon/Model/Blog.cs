@@ -9,7 +9,7 @@ namespace AduCon.Model
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string PargraphIds { get; set; }
+        public DateTime  DateCreated{ get; set; }
         public bool IsActive { get; set; }
     }
 }

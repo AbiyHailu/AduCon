@@ -11,8 +11,12 @@ import { BlogComponent } from './blog/blog.component';
 import { TseduComponent } from './tsedu/tesdu.component';
 import { AdminGuard } from './login/service/admin.guard.service';
 import { LoginComponent } from './login/login.component';
+import { CrudComponent } from './crud/crud.component';
+import { AppRoutingModule } from './app-routing.module';
+import { CommonModule } from '@angular/common';
+import {  NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
+@NgModule({  
   declarations: [
     AppComponent,
     NavMenuComponent,
@@ -20,20 +24,20 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     BlogComponent,
     TseduComponent,
-    LoginComponent
+    LoginComponent, 
+    CrudComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    CommonModule,
+    BrowserModule ,
     HttpClientModule,
-    FormsModule, 
     ReactiveFormsModule,
-    RouterModule.forRoot([
-       { path: '', component: HomeComponent, pathMatch: 'full' },
-       { path: 'about', component: AboutComponent },
-       { path: 'blogs', component: BlogComponent },      
-       { path: 'login', component: LoginComponent },    
-       { path: 'tsedu', component: TseduComponent , canActivate: [AdminGuard]},
-    ])
+    FormsModule, 
+    AppRoutingModule ,
+    NgbModule,
+  ], 
+   entryComponents:[
+    CrudComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,12 @@
-﻿using System;
+﻿using AduCon.Data;
+using AduCon.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AduCon.Data;
-using AduCon.Model;
-using Microsoft.AspNetCore.Authorization;
 
 namespace AduCon.Controllers
 {
@@ -81,9 +80,10 @@ namespace AduCon.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost] 
-        [Authorize(Policy = Policies.Admin)]
+       // [Authorize(Policy = Policies.Admin)]
         public async Task<ActionResult<Blog>> PostBlog(Blog blog)
-        {
+        { 
+             blog.DateCreated = DateTime.Now;
             _context.Blogs.Add(blog);
             await _context.SaveChangesAsync();
 

@@ -18,24 +18,50 @@ export class BlogComponent implements OnDestroy {
   ) {
     this.getBlogs()
   }
-  getBlogs() { 
-    this.paragraphs=[]
+  getBlogs() {
     this.blogService.getBlogs()
       .pipe(takeUntil(this.subject))
       .subscribe(res => {
-        this.blogs = res
-        this.blog = res.reduce((a, b) => (a.dateCreated > b.dateCreated ? a : b));
-        this.blog.paragraphs.forEach(e => {
-          this.getBlogById(e)
-        })
+        this.blogs = res 
+        this.getParagraphs()
       })
   }
+  
+  paras: Paragraph[] = []
+  getParagraphs() {
+    this.blogService.getParas()
+      .pipe(takeUntil(this.subject))
+      .subscribe(res => {
+        this.paras = res
+      })
+  }
+
+  mergedBlogs = []
+  mergeBlogsandParas(blogs, paras) {
+    this.mergedBlogs = []
+    if (blogs && blogs.length > 0) {
+      blogs.forEach(element => {
+        if (paras && paras.length > 0) {
+          let paragraphs = []
+          paras.forEach(e => {
+            if (element.id == e.blogId) {
+              paragraphs.push(e)
+              element = Object.assign({}, paragraphs, element)
+            }
+          });
+          console.log(" this.mergedBlogs", this.mergedBlogs)
+          this.mergedBlogs.push(element)
+        }
+      });
+    }
+  }
+  
   selectBlog(blog) { 
     this.paragraphs=[]
     this.blog = this.blogs.find(e => e == blog)
-    this.blog.paragraphs.forEach(e => {
+   /*  this.blog.paragraphs.forEach(e => {
       this.getBlogById(e)
-    })
+    }) */
   }
 
   getBlogById(e) { 

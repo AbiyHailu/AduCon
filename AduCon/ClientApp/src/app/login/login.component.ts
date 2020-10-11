@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';    
+import { SharedService } from '../service/shared.service';
 import { AuthService } from './service/auth.service';
+import { JwtDecodeService } from './service/JwtDecoder.service';
 
 @Component({
   selector: 'app-login',
@@ -17,12 +19,14 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService 
+    private authService: AuthService,
+    private shared:SharedService, 
+    private jwtDecoder: JwtDecodeService
   ) {  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-        name: ['', [Validators.required, Validators.email]],
+        name: ['', [Validators.required]],
         password: ['', Validators.required]
     });
   }
@@ -40,10 +44,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)
       .pipe(first())
       .subscribe(
-        data => { 
-          
-    console.log(data)
-          this.router.navigate([returnUrl]); 
+        data => {    
+         this.router.navigate([returnUrl]); 
+         this.shared.changePayload(this.jwtDecoder.jwtDecode(localStorage.getItem('authToken')))
         },
         error => { 
           this.loading = false;

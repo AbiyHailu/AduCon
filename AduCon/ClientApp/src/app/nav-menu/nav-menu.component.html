@@ -17,6 +17,12 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-light" [routerLink]="['/blogs']">Blogs</a>
           </li>
+          <li *ngIf="payload" class="nav-item" (click)="logOut()" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-light" [routerLink]="['/']">Logout</a>
+          </li>
+          <li *ngIf="payload" class="nav-item"  [routerLinkActive]="['link-active']"[routerLink]="['/tsedu']">
+            <a class="nav-link text-light" [routerLink]="['/']">Admin</a>
+          </li>
         </ul>
       </div>
     </div>

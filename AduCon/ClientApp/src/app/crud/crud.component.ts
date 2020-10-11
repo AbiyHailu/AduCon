@@ -1,46 +1,48 @@
-import { Component, Input, OnInit, OnDestroy, EventEmitter } from '@angular/core'; 
+import { Component, Input, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap'; 
- 
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'crud',
-  styleUrls: ['crud.component.scss'], 
+  styleUrls: ['crud.component.scss'],
   templateUrl: './crud.component.html',
 })
 export class CrudComponent implements OnInit, OnDestroy {
 
   @Input() public data: any;
-  @Input() public type: any; 
+  @Input() public type: any;
   subscriptions: any
-  constructor( 
-    public activeModal: NgbActiveModal 
-  ) {  }
+  constructor(
+    public activeModal: NgbActiveModal
+  ) { }
 
-  dataForm:FormGroup
+  dataForm: FormGroup
   ngOnInit(): void {
-    this.dataForm = this.createForm(this.data) 
+    this.dataForm = this.createForm(this.data)
   }
 
-  enablform=false
-  createForm(data) { 
+  enablform = false
+  createForm(data) {
     const formGroup = {};
-    
-    data.forEach(e => {  
-      formGroup[e.Binding] = new FormControl({value: e.Value ||'', disabled: e.Disable||false} ) 
-    })
-    this.enablform=true
-    return new FormGroup(formGroup);
+    console.log("data", data)
+    if (data &&data.length>0) {
+      data.forEach(e => {
+        formGroup[e.Binding] = new FormControl({ value: e.Value || '', disabled: e.Disable || false })
+      })
+      this.enablform = true
+      return new FormGroup(formGroup);
+    } 
   }
   public event: EventEmitter<any> = new EventEmitter();
-  onChange(val:any){ 
+  onChange(val: any) {
     this.event.emit(val);
   }
 
   submitData(dataForm: any) {
-    this.activeModal.close(dataForm.value) 
+    this.activeModal.close(dataForm.value)
   }
 
-  cancel() { 
+  cancel() {
     this.activeModal.close(null)
   }
 

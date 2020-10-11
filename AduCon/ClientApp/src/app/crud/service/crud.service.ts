@@ -22,7 +22,7 @@ export class CrudService {
   getAddBlogItems() {
     return [
       { Binding: 'title', Label: "Enter Title", Type: 'text' }, 
-      { Binding: 'isActive', Label: "Enter Phone", Type: 'checkBox' }
+      { Binding: 'isActive', Label: "Is Active", Type: 'checkBox' }
     ]
   } 
 }
